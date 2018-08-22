@@ -130,17 +130,20 @@ export default class Bubble extends React.PureComponent {
 
   render() {
     return (
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        colors={
-          this.props.position === 'left'
-            ? ['rgb(36, 127, 188)', 'rgb(0, 205, 172)']
-            : ['#f0f0f0', '#f0f0f0']
-          }
-        style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}
+      <View
+        style={[
+          styles[this.props.position].container,
+          this.props.containerStyle[this.props.position],
+        ]}
       >
-        <View
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={
+            this.props.position === 'left'
+              ? ['rgb(36, 127, 188)', 'rgb(69, 186, 244)']
+              : ['#f0f0f0', '#f0f0f0']
+            }
           style={[
             styles[this.props.position].wrapper,
             this.props.wrapperStyle[this.props.position],
@@ -163,8 +166,8 @@ export default class Bubble extends React.PureComponent {
               </View>
             </View>
           </TouchableWithoutFeedback>
-        </View>
-      </LinearGradient>
+        </LinearGradient>
+      </View>
     );
   }
 
@@ -178,10 +181,10 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: Color.leftBubbleBackground,
       marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
+      backgroundColor: 'transparent',
     },
     containerToNext: {
       borderBottomLeftRadius: 3,
