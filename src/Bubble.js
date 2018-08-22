@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTypes } from 'react-native';
 
 import MessageText from './MessageText';
@@ -156,7 +157,16 @@ export default class Bubble extends React.Component {
 
   render() {
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
+      <LinearGradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        colors={
+          this.props.position === 'left'
+            ? ['rgb(36, 127, 188)', 'rgb(0, 205, 172)']
+            : ['#f0f0f0', '#f0f0f0']
+          }
+        style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}
+      >
         <View
           style={[
             styles[this.props.position].wrapper,
@@ -183,7 +193,7 @@ export default class Bubble extends React.Component {
             </View>
           </TouchableWithoutFeedback>
         </View>
-      </View>
+      </LinearGradient>
     );
   }
 
