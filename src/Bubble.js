@@ -140,10 +140,16 @@ export default class Bubble extends React.PureComponent {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           colors={
-            this.props.position === 'left'
-              ? ['rgb(36, 127, 188)', 'rgb(69, 186, 244)']
-              : ['#f0f0f0', '#f0f0f0']
-            }
+            this.props.gradient && this.props.gradient[this.props.position]
+              ? [
+                  this.props.gradient[this.props.position].start,
+                  this.props.gradient[this.props.position].end,
+                ]
+              : [
+                  this.props.wrapperStyle[this.props.position].backgroundColor,
+                  this.props.wrapperStyle[this.props.position].backgroundColor,
+                ]
+          }
           style={[
             styles[this.props.position].wrapper,
             this.props.wrapperStyle[this.props.position],
@@ -271,6 +277,16 @@ Bubble.propTypes = {
   containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
+  }),
+  gradient: PropTypes.shape({
+    left: PropTypes.shape({
+      start: PropTypes.string,
+      end: PropTypes.string,
+    }),
+    right: PropTypes.shape({
+      start: PropTypes.string,
+      end: PropTypes.string,
+    }),
   }),
   wrapperStyle: PropTypes.shape({
     left: ViewPropTypes.style,
