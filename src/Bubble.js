@@ -2,6 +2,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import { Text, Clipboard, StyleSheet, TouchableWithoutFeedback, View, ViewPropTypes } from 'react-native';
 
 import MessageText from './MessageText';
@@ -129,8 +130,26 @@ export default class Bubble extends React.PureComponent {
 
   render() {
     return (
-      <View style={[styles[this.props.position].container, this.props.containerStyle[this.props.position]]}>
-        <View
+      <View
+        style={[
+          styles[this.props.position].container,
+          this.props.containerStyle[this.props.position],
+        ]}
+      >
+        <LinearGradient
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          colors={
+            this.props.gradient && this.props.gradient[this.props.position]
+              ? [
+                  this.props.gradient[this.props.position].start,
+                  this.props.gradient[this.props.position].end,
+                ]
+              : [
+                  this.props.wrapperStyle[this.props.position].backgroundColor,
+                  this.props.wrapperStyle[this.props.position].backgroundColor,
+                ]
+          }
           style={[
             styles[this.props.position].wrapper,
             this.props.wrapperStyle[this.props.position],
@@ -153,7 +172,7 @@ export default class Bubble extends React.PureComponent {
               </View>
             </View>
           </TouchableWithoutFeedback>
-        </View>
+        </LinearGradient>
       </View>
     );
   }
@@ -168,10 +187,10 @@ const styles = {
     },
     wrapper: {
       borderRadius: 15,
-      backgroundColor: Color.leftBubbleBackground,
       marginRight: 60,
       minHeight: 20,
       justifyContent: 'flex-end',
+      backgroundColor: 'transparent',
     },
     containerToNext: {
       borderBottomLeftRadius: 3,
@@ -258,6 +277,16 @@ Bubble.propTypes = {
   containerStyle: PropTypes.shape({
     left: ViewPropTypes.style,
     right: ViewPropTypes.style,
+  }),
+  gradient: PropTypes.shape({
+    left: PropTypes.shape({
+      start: PropTypes.string,
+      end: PropTypes.string,
+    }),
+    right: PropTypes.shape({
+      start: PropTypes.string,
+      end: PropTypes.string,
+    }),
   }),
   wrapperStyle: PropTypes.shape({
     left: ViewPropTypes.style,
