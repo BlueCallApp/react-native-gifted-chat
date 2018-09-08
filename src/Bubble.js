@@ -136,6 +136,7 @@ export default class Bubble extends React.PureComponent {
           this.props.containerStyle[this.props.position],
         ]}
       >
+        {this.renderTime()}
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -167,7 +168,6 @@ export default class Bubble extends React.PureComponent {
               {this.renderMessageImage()}
               {this.renderMessageText()}
               <View style={[styles.bottom, this.props.bottomContainerStyle[this.props.position]]}>
-                {this.renderTime()}
                 {this.renderTicks()}
               </View>
             </View>
