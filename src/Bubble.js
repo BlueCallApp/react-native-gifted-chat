@@ -163,6 +163,7 @@ export default class Bubble extends React.Component {
           this.props.containerStyle[this.props.position],
         ]}
       >
+        {this.renderTime()}
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -196,7 +197,6 @@ export default class Bubble extends React.Component {
               {this.renderMessageText()}
               <View style={[styles[this.props.position].bottom, this.props.bottomContainerStyle[this.props.position]]}>
                 {this.renderUsername()}
-                {this.renderTime()}
                 {this.renderTicks()}
               </View>
             </View>
