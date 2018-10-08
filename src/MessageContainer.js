@@ -97,6 +97,10 @@ export default class MessageContainer extends React.PureComponent {
     }
   };
 
+  onScrollBegin() {
+    Keyboard.dismiss();
+  }
+
   renderRow = ({ item, index }) => {
     if (!item._id && item._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
@@ -157,6 +161,7 @@ export default class MessageContainer extends React.PureComponent {
       <View style={styles.container}>
         {this.state.showScrollBottom && this.props.scrollToBottom ? this.renderScrollToBottomWrapper() : null}
         <FlatList
+          onScrollBeginDrag={this.onScrollBegin}
           ref={(ref) => (this.flatListRef = ref)}
           extraData={this.props.extraData}
           keyExtractor={this.keyExtractor}
