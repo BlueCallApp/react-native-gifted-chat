@@ -10,7 +10,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { FlatList, View, StyleSheet, Platform } from 'react-native';
+import { FlatList, View, StyleSheet, Platform, Keyboard } from 'react-native';
 
 import LoadEarlier from './LoadEarlier';
 import Message from './Message';
@@ -55,6 +55,10 @@ export default class MessageContainer extends React.PureComponent {
     }
   }
 
+  onScrollBegin() {
+    Keyboard.dismiss();
+  }
+
   renderRow({ item, index }) {
     if (!item._id && item._id !== 0) {
       console.warn('GiftedChat: `_id` is missing for message', JSON.stringify(item));
@@ -95,6 +99,7 @@ export default class MessageContainer extends React.PureComponent {
     return (
       <View style={styles.container}>
         <FlatList
+          onScrollBeginDrag={this.onScrollBegin}
           ref={(ref) => (this.flatListRef = ref)}
           keyExtractor={(item) => item._id}
           enableEmptySections
